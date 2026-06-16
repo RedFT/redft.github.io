@@ -5,8 +5,6 @@ description: The accidental path from a desktop chat app to running AI coding ag
 tags: [ai, self-hosting, llm, gpu]
 ---
 
-## [The Jan Discovery](#the-jan-discovery)
-
 I found Jan by accident. It is a desktop app that downloads models from Hugging Face and runs them on your GPU. I installed it, loaded a 7B model, and watched it generate its first response. No API key. No credit card. No data leaving my machine. It felt like discovering you can brew your own coffee instead of buying it, except the coffee is a language model and the brewing involves gigabytes of weights.
 
 <a href="/images/jan-screenshot.png" target="_blank"><img src="/images/jan-screenshot.png" alt="Screenshot of the Jan desktop app showing the chat interface with a local LLM" style="width:75%;border-radius:8px;margin:1.5rem auto;display:block;" /></a>

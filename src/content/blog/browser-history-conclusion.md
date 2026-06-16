@@ -7,9 +7,7 @@ tags: [personal, meta, curiosity]
 
 <a href="https://images.unsplash.com/photo-1504639725590-34d0984388bd?auto=format&fit=crop" target="_blank"><img src="https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=800&auto=format&fit=crop" alt="Eyeglasses reflecting code on a computer screen" style="width:75%;border-radius:8px;margin:1.5rem auto;display:block;" /></a>
 
-## [What My Browser History Says About Me](#what-my-browser-history-says-about-me)
-
-I did something weird recently. I opened my browser history SQLite database and started poking around. Not for anything important, just curiosity. I wanted to see what the data said about me without the stories I tell myself.
+I did something weird recently.
 
 What I found was pretty funny:
 
