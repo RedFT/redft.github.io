@@ -401,6 +401,28 @@ hr {
   header nav a {
     font-size: 0.85rem;
   }
+
+  .share-float {
+    position: static;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .back-to-top {
+    right: 1rem;
+    left: auto;
+    top: auto;
+    bottom: 1.5rem;
+  }
+}
+
+@media (max-width: 1100px) and (min-width: 769px) {
+  .share-float {
+    left: 1rem;
+  }
 }
 
 /* ── Back to top ── */
@@ -496,9 +518,6 @@ hr {
   border-color: var(--accent);
   color: var(--accent);
   text-decoration: none;
-}
-@media (max-width: 1100px) {
-  .share-float { display: none; }
 }
 
 /* ── Tags on posts ── */

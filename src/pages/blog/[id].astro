@@ -17,12 +17,21 @@ const wordCount = post.body ? post.body.trim().split(/\s+/).length : 0;
 const readingTime = Math.max(1, Math.round(wordCount / 200));
 
 const allPosts = await getCollection('blog');
-const otherPosts = allPosts
-  .filter(p => p.id !== post.id)
+const otherPosts = allPosts.filter(p => p.id !== post.id);
+
+// Prioritize posts sharing tags with the current post
+const tags = post.data.tags || [];
+const tagMatch = otherPosts.filter(p =>
+  (p.data.tags || []).some(t => tags.includes(t))
+);
+const tagMiss = otherPosts.filter(p =>
+  !(p.data.tags || []).some(t => tags.includes(t))
+);
+
+const suggestedPosts = [...tagMatch, ...tagMiss]
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 3);
 
-const tags = post.data.tags || [];
 ---
 
 <BaseLayout title={post.data.title} description={post.data.description} currentPath={Astro.url.pathname}>
@@ -98,11 +107,11 @@ const tags = post.data.tags || [];
   </div>
 
   {
-    otherPosts.length > 0 && (
+    suggestedPosts.length > 0 && (
       <section class="suggested-posts">
         <h2>Continue reading</h2>
         <div class="suggested-grid">
-          {otherPosts.map(suggested => (
+          {suggestedPosts.map(suggested => (
             <a href={`/blog/${suggested.id}`} class="suggested-card">
               <h3>{suggested.data.title}</h3>
               {suggested.data.description && <p>{suggested.data.description}</p>}
