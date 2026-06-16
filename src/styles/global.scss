@@ -406,7 +406,8 @@ hr {
 /* ── Back to top ── */
 .back-to-top {
   position: fixed;
-  bottom: 2rem;
+  bottom: auto;
+  top: 8px;
   right: auto;
   left: calc(50% + 360px + 1.25rem);
   width: 44px;
