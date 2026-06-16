@@ -1,0 +1,73 @@
+---
+import '../styles/global.scss';
+
+export interface Props {
+  title?: string;
+  description?: string;
+  currentPath?: string;
+}
+
+const { title, description = 'Personal site of RedFT', currentPath = '/' } = Astro.props;
+const pageTitle = title ? `${title} | RedFT` : 'RedFT';
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const navLinks = [
+  { href: '/', label: 'Blog' },
+  { href: '/about', label: 'About' },
+];
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:description" content={description} />
+    <meta name="twitter:card" content="summary" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Material+Icons&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <header>
+      <div class="inner">
+        <a href="/" class="site-name">RedFT</a>
+        <nav>
+          {navLinks.map(link => (
+            <a
+              href={link.href}
+              class:list={{ active: currentPath === link.href }}
+            >{link.label}</a>
+          ))}
+        </nav>
+      </div>
+    </header>
+    <main class="main" id="main-content">
+      <slot />
+    </main>
+    <script>
+      document.querySelectorAll('h1 a[href^="#"], h2 a[href^="#"], h3 a[href^="#"], h4 a[href^="#"], h5 a[href^="#"]').forEach(a => {
+        a.setAttribute('title', 'Copy link');
+        a.addEventListener('click', e => {
+          e.preventDefault();
+          const url = window.location.href.split('#')[0] + a.getAttribute('href');
+          navigator.clipboard.writeText(url).then(() => {
+            const toast = document.createElement('span');
+            toast.textContent = 'Copied!';
+            toast.style.cssText = 'position:absolute;left:100%;top:50%;transform:translateY(-50%);margin-left:0.5rem;font-size:0.75rem;color:#7a7a8a;white-space:nowrap;pointer-events:none;animation:fadeOut 1.5s forwards;';
+            a.style.position = 'relative';
+            a.appendChild(toast);
+            setTimeout(() => toast.remove(), 1500);
+          });
+        });
+      });
+      const style = document.createElement('style');
+      style.textContent = '@keyframes fadeOut { 0% { opacity:1; } 70% { opacity:1; } 100% { opacity:0; } }';
+      document.head.appendChild(style);
+    </script>
+  </body>
+</html>

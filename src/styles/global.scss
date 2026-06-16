@@ -1,0 +1,404 @@
+/* ── Ink & Ember — Design Tokens ── */
+:root {
+  --bg:        #0c0c10;
+  --bg-soft:   #16161c;
+  --bg-card:   #1c1c26;
+  --border:    #282836;
+  --border-hover: #3a3a48;
+
+  --text:      #e8ddd0;
+  --text-soft: #a09a90;
+  --text-muted:#7a7a84;
+
+  --accent:    #e08a00;
+  --accent-hover: #f59e0b;
+  --gold:      #d97706;
+  --copper:    #b45309;
+
+  --code-bg:   #181822;
+  --code-text: #ddd6cc;
+
+  --radius:    8px;
+  --radius-sm: 4px;
+  --content-w: 720px;
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', Consolas, monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--bg);
+}
+
+body {
+  font-family: var(--font);
+  background-color: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  font-size: 1rem;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Navigation ── */
+header {
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background: rgba(12, 12, 16, 0.85);
+}
+
+header .inner {
+  max-width: var(--content-w);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+}
+
+header .site-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+  text-decoration: none;
+  letter-spacing: -0.02em;
+  transition: color 0.2s;
+}
+
+header .site-name:hover {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+header nav {
+  display: flex;
+  gap: 1.5rem;
+}
+
+header nav a {
+  font-size: 0.9rem;
+  color: var(--text-soft);
+  text-decoration: none;
+  padding: 0.25rem 0;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+header nav a:hover {
+  color: var(--text);
+  text-decoration: none;
+  border-bottom-color: var(--accent);
+}
+
+header nav a.active {
+  color: var(--text);
+  border-bottom-color: var(--accent);
+}
+
+/* ── Main content ── */
+.main {
+  max-width: var(--content-w);
+  margin: 0 auto;
+  padding: 3rem 1.5rem 4rem;
+}
+
+/* ── Post list (homepage) ── */
+.post-list ul {
+  list-style: none;
+}
+
+.post-list li {
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border);
+  transition: border-color 0.2s;
+}
+
+.post-list li:last-child {
+  border-bottom: none;
+}
+
+.post-list .post-title {
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 1.35rem;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  display: inline-block;
+  transition: color 0.2s;
+}
+
+.post-list .post-title:hover {
+  color: var(--accent-hover);
+  text-decoration: none;
+}
+
+.post-list .post-excerpt {
+  margin-top: 0.5rem;
+  color: var(--text-soft);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.post-date {
+  color: var(--gold);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+/* ── Single post ── */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-bottom: 2rem;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.back-link:hover {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.post-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.75rem;
+}
+
+.post-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 2.5rem;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.reading-time {
+  color: var(--text-muted);
+}
+
+.post-meta .separator {
+  color: var(--border-hover);
+}
+
+/* ── Typography ── */
+h1, h2, h3, h4, h5 {
+  color: var(--text);
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+}
+
+h1 { font-size: 2rem; font-weight: 700; margin-top: 0; margin-bottom: 0.75rem; }
+h2 { font-size: 1.5rem; font-weight: 600; margin-top: 2.5rem; margin-bottom: 0.75rem; }
+h3 { font-size: 1.2rem; font-weight: 600; margin-top: 2rem; margin-bottom: 0.5rem; }
+
+h2 a[href^="#"],
+h3 a[href^="#"],
+h4 a[href^="#"],
+h5 a[href^="#"] {
+  color: inherit;
+  text-decoration: none;
+  position: relative;
+}
+
+h2 a[href^="#"]::after,
+h3 a[href^="#"]::after,
+h4 a[href^="#"]::after,
+h5 a[href^="#"]::after {
+  font-family: 'Material Icons';
+  content: "content_copy";
+  font-size: 0.55em;
+  opacity: 0;
+  margin-left: 0.3em;
+  transition: opacity 0.2s;
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
+}
+
+h2:hover a[href^="#"]::after,
+h3:hover a[href^="#"]::after,
+h4:hover a[href^="#"]::after,
+h5:hover a[href^="#"]::after {
+  opacity: 0.5;
+}
+
+h2 a[href^="#"]:hover::after,
+h3 a[href^="#"]:hover::after,
+h4 a[href^="#"]:hover::after,
+h5 a[href^="#"]:hover::after {
+  opacity: 0.8;
+}
+
+p {
+  margin-bottom: 1.25rem;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+a:hover {
+  color: var(--accent-hover);
+  text-decoration: underline;
+}
+
+/* ── Lists ── */
+.main ul,
+.main ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.main li {
+  margin-bottom: 0.35rem;
+}
+
+/* ── Images ── */
+.main img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  margin: 1.5rem 0;
+}
+
+/* ── Blockquotes ── */
+blockquote {
+  border-left: 3px solid var(--accent);
+  padding: 0.75rem 1rem;
+  margin: 1.5rem 0;
+  background: var(--bg-card);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  color: var(--text-soft);
+}
+
+blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+/* ── Code ── */
+code {
+  font-family: var(--font-mono);
+  background-color: var(--code-bg);
+  padding: 0.15rem 0.4rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.875em;
+  color: var(--code-text);
+}
+
+pre {
+  background-color: var(--code-bg);
+  padding: 1.25rem;
+  border-radius: var(--radius);
+  overflow-x: auto;
+  margin: 1.5rem 0;
+  border: 1px solid var(--border);
+  line-height: 1.5;
+}
+
+pre code {
+  background: none;
+  padding: 0;
+  font-size: 0.85rem;
+  color: var(--code-text);
+}
+
+/* ── Horizontal rules ── */
+hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 2.5rem 0;
+}
+
+/* ── Tables ── */
+.main table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.9rem;
+}
+
+.main th,
+.main td {
+  padding: 0.6rem 0.8rem;
+  text-align: left;
+  border: 1px solid var(--border);
+}
+
+.main th {
+  background-color: var(--bg-soft);
+  color: var(--text);
+  font-weight: 600;
+}
+
+.main td {
+  color: var(--text-soft);
+}
+
+.main tr:nth-child(even) td {
+  background-color: rgba(255,255,255,0.02);
+}
+
+/* ── Focus styles ── */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* ── Selection ── */
+::selection {
+  background: rgba(224, 138, 0, 0.25);
+  color: var(--text);
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .main {
+    padding: 2rem 1.25rem 3rem;
+  }
+
+  header .inner {
+    padding: 0 1.25rem;
+  }
+
+  .post-title {
+    font-size: 1.5rem;
+  }
+
+  .post-list .post-title {
+    font-size: 1.15rem;
+  }
+
+  header nav {
+    gap: 1rem;
+  }
+
+  header nav a {
+    font-size: 0.85rem;
+  }
+}
