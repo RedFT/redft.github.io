@@ -13,7 +13,7 @@ const tags = [...new Set(allPosts.flatMap(p => p.data.tags || []))].sort();
     {tags.map(tag => {
       const count = allPosts.filter(p => (p.data.tags || []).includes(tag)).length;
       return (
-        <a href={`/blog/tag/${tag}/`} class="tag-pill">
+        <a href={`/blog/tag/${tag}`} class="tag-pill">
           {tag} <span class="tag-count">({count})</span>
         </a>
       );

@@ -38,7 +38,7 @@ const tags = post.data.tags || [];
     tags.length > 0 && (
       <div class="post-tags">
         {tags.map(tag => (
-          <a href={`/blog/tag/${tag}/`} class="tag-pill">#{tag}</a>
+          <a href={`/blog/tag/${tag}`} class="tag-pill">#{tag}</a>
         ))}
       </div>
     )
@@ -52,7 +52,7 @@ const tags = post.data.tags || [];
         <h2>Continue reading</h2>
         <div class="suggested-grid">
           {otherPosts.map(suggested => (
-            <a href={`/blog/${suggested.id}/`} class="suggested-card">
+            <a href={`/blog/${suggested.id}`} class="suggested-card">
               <h3>{suggested.data.title}</h3>
               {suggested.data.description && <p>{suggested.data.description}</p>}
             </a>
