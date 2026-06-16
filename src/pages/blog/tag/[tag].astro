@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import PostList from '../../../components/PostList.astro';
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection('blog');
+  const tags = [...new Set(allPosts.flatMap(p => p.data.tags || []))];
+  return tags.map(tag => ({
+    params: { tag },
+    props: { tag, posts: allPosts.filter(p => (p.data.tags || []).includes(tag)) },
+  }));
+}
+
+const { tag, posts } = Astro.props;
+const sorted = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<BaseLayout title={`Tag: ${tag}`} description={`Posts tagged "${tag}"`} currentPath={Astro.url.pathname}>
+  <a href="/" class="back-link">&larr; Back to all posts</a>
+  <h1 class="post-title" style="text-transform:capitalize;">
+    <a href="/blog/tag/" class="tag-pill" style="font-size:1.2rem;padding:0.5rem 1rem;font-weight:600;">#{tag}</a>
+  </h1>
+  <PostList posts={sorted} />
+</BaseLayout>

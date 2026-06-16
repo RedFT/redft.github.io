@@ -1,8 +1,9 @@
 ---
 import { getCollection } from 'astro:content';
 
-const posts = await getCollection('blog');
-const sorted = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const { posts: propPosts } = Astro.props;
+const allPosts = propPosts || await getCollection('blog');
+const sorted = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 
 <div class="post-list">

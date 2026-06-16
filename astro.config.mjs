@@ -7,4 +7,10 @@ export default defineConfig({
   trailingSlash: 'never',
   server: { port: 45451 },
   integrations: [sitemap()],
+  markdown: {
+    shikiConfig: {
+      theme: 'catppuccin-mocha',
+      wrap: true,
+    },
+  },
 });

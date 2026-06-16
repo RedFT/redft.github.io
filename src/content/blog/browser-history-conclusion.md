@@ -2,6 +2,7 @@
 title: What My Browser History Says About Me
 pubDate: 2026-02-02
 description: I looked at my own browsing data and learned a few things about who I actually am, not who I think I am.
+tags: [personal, meta, curiosity]
 ---
 
 <a href="https://images.unsplash.com/photo-1504639725590-34d0984388bd?auto=format&fit=crop" target="_blank"><img src="https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=800&auto=format&fit=crop" alt="Eyeglasses reflecting code on a computer screen" style="width:75%;border-radius:8px;margin:1.5rem auto;display:block;" /></a>

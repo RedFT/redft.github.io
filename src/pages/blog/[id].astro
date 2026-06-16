@@ -21,6 +21,8 @@ const otherPosts = allPosts
   .filter(p => p.id !== post.id)
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 3);
+
+const tags = post.data.tags || [];
 ---
 
 <BaseLayout title={post.data.title} description={post.data.description} currentPath={Astro.url.pathname}>
@@ -31,6 +33,17 @@ const otherPosts = allPosts
     <span class="separator">&middot;</span>
     <span class="reading-time">{readingTime} min read</span>
   </p>
+
+  {
+    tags.length > 0 && (
+      <div class="post-tags">
+        {tags.map(tag => (
+          <a href={`/blog/tag/${tag}/`} class="tag-pill">#{tag}</a>
+        ))}
+      </div>
+    )
+  }
+
   <Content />
 
   {
@@ -38,69 +51,14 @@ const otherPosts = allPosts
       <section class="suggested-posts">
         <h2>Continue reading</h2>
         <div class="suggested-grid">
-          {
-            otherPosts.map(suggested => (
-              <a href={`/blog/${suggested.id}/`} class="suggested-card">
-                <h3>{suggested.data.title}</h3>
-                {suggested.data.description && <p>{suggested.data.description}</p>}
-              </a>
-            ))
-          }
+          {otherPosts.map(suggested => (
+            <a href={`/blog/${suggested.id}/`} class="suggested-card">
+              <h3>{suggested.data.title}</h3>
+              {suggested.data.description && <p>{suggested.data.description}</p>}
+            </a>
+          ))}
         </div>
       </section>
     )
   }
 </BaseLayout>
-
-<style>
-  .suggested-posts {
-    margin-top: 4rem;
-    padding-top: 2rem;
-    border-top: 1px solid rgba(232, 221, 208, 0.1);
-  }
-
-  .suggested-posts h2 {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: #d97706;
-    margin-bottom: 1.25rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-
-  .suggested-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 1rem;
-  }
-
-  .suggested-card {
-    display: block;
-    padding: 1.25rem;
-    background: rgba(232, 221, 208, 0.03);
-    border: 1px solid rgba(232, 221, 208, 0.08);
-    border-radius: 8px;
-    text-decoration: none;
-    transition: background 0.2s ease, border-color 0.2s ease;
-  }
-
-  .suggested-card:hover {
-    background: rgba(232, 221, 208, 0.06);
-    border-color: rgba(232, 221, 208, 0.15);
-  }
-
-  .suggested-card h3 {
-    font-size: 1rem;
-    font-weight: 600;
-    color: #e8ddd0;
-    margin: 0 0 0.4rem 0;
-    line-height: 1.3;
-  }
-
-  .suggested-card p {
-    font-size: 0.85rem;
-    color: rgba(232, 221, 208, 0.55);
-    margin: 0;
-    line-height: 1.4;
-  }
-</style>

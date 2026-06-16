@@ -1,5 +1,6 @@
 ---
 import '../styles/global.scss';
+import { ViewTransitions } from 'astro:transitions';
 
 export interface Props {
   title?: string;
@@ -12,6 +13,7 @@ const pageTitle = title ? `${title} | RedFT` : 'RedFT';
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const navLinks = [
   { href: '/', label: 'Blog' },
+  { href: '/blog/tag/', label: 'Tags' },
   { href: '/about', label: 'About' },
 ];
 ---
@@ -28,9 +30,11 @@ const navLinks = [
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:description" content={description} />
     <meta name="twitter:card" content="summary" />
+    <link rel="alternate" type="application/rss+xml" title="RedFT" href="/rss.xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Material+Icons&display=swap" rel="stylesheet" />
+    <ViewTransitions />
   </head>
   <body>
     <header>
@@ -49,7 +53,11 @@ const navLinks = [
     <main class="main" id="main-content">
       <slot />
     </main>
+    <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+      <span class="material-icons">keyboard_arrow_up</span>
+    </button>
     <script>
+      // Copy link to heading
       document.querySelectorAll('h1 a[href^="#"], h2 a[href^="#"], h3 a[href^="#"], h4 a[href^="#"], h5 a[href^="#"]').forEach(a => {
         a.setAttribute('title', 'Copy link');
         a.addEventListener('click', e => {
@@ -68,6 +76,40 @@ const navLinks = [
       const style = document.createElement('style');
       style.textContent = '@keyframes fadeOut { 0% { opacity:1; } 70% { opacity:1; } 100% { opacity:0; } }';
       document.head.appendChild(style);
+
+      // Back to top
+      const backToTop = document.getElementById('back-to-top');
+      let ticking = false;
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          requestAnimationFrame(() => {
+            backToTop.classList.toggle('visible', window.scrollY > 400);
+            ticking = false;
+          });
+          ticking = true;
+        }
+      });
+      backToTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      // Image lightbox
+      document.querySelectorAll('.main a[target="_blank"] img').forEach(img => {
+        const link = img.closest('a');
+        if (!link) return;
+        link.addEventListener('click', e => {
+          e.preventDefault();
+          const overlay = document.createElement('div');
+          overlay.className = 'lightbox-overlay';
+          overlay.innerHTML = `<div class="lightbox-bg"></div><img src="${link.href}" alt="${img.alt}" class="lightbox-img" />`;
+          overlay.querySelector('.lightbox-bg').addEventListener('click', () => overlay.remove());
+          overlay.addEventListener('click', e => { if (e.target === overlay) overlay.remove(); });
+          document.addEventListener('keydown', function handler(ke) {
+            if (ke.key === 'Escape') { overlay.remove(); document.removeEventListener('keydown', handler); }
+          });
+          document.body.appendChild(overlay);
+        });
+      });
     </script>
   </body>
 </html>

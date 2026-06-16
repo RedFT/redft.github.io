@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import PostList from '../../../components/PostList.astro';
+
+const allPosts = await getCollection('blog');
+const tags = [...new Set(allPosts.flatMap(p => p.data.tags || []))].sort();
+---
+
+<BaseLayout title="Tags" description="Browse posts by tag" currentPath={Astro.url.pathname}>
+  <h1 class="post-title">Tags</h1>
+  <div class="tag-cloud">
+    {tags.map(tag => {
+      const count = allPosts.filter(p => (p.data.tags || []).includes(tag)).length;
+      return (
+        <a href={`/blog/tag/${tag}/`} class="tag-pill">
+          {tag} <span class="tag-count">({count})</span>
+        </a>
+      );
+    })}
+  </div>
+</BaseLayout>
+
+<style>
+  .tag-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 1.5rem;
+  }
+  .tag-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.35rem 0.75rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    font-size: 0.85rem;
+    color: var(--text-soft);
+    text-decoration: none;
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
+  }
+  .tag-pill:hover {
+    background: var(--border);
+    border-color: var(--accent);
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .tag-count {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+  }
+</style>

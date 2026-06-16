@@ -2,6 +2,7 @@
 title: My Accidental Local AI Setup
 pubDate: 2026-01-15
 description: The accidental path from a desktop chat app to running AI coding agents on self-hosted models.
+tags: [ai, self-hosting, llm, gpu]
 ---
 
 ## [The Jan Discovery](#the-jan-discovery)
