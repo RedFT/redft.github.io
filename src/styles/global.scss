@@ -467,6 +467,40 @@ hr {
   to   { opacity: 1; transform: scale(1); }
 }
 
+/* ── Share buttons ── */
+.share-buttons {
+  display: flex;
+  gap: 0.5rem;
+  margin: 2rem 0 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-card);
+  color: var(--text-soft);
+  font-size: 0.85rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+  font-family: inherit;
+  line-height: 1;
+}
+.share-btn:hover {
+  background: var(--border);
+  border-color: var(--accent);
+  color: var(--accent);
+  text-decoration: none;
+}
+.share-btn svg {
+  flex-shrink: 0;
+}
+
 /* ── Tags on posts ── */
 .post-tags {
   display: flex;
