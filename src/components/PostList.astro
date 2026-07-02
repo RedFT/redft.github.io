@@ -4,6 +4,10 @@ import { getCollection } from 'astro:content';
 const { posts: propPosts } = Astro.props;
 const allPosts = propPosts || await getCollection('blog');
 const sorted = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const formatDate = (date) => {
+  const d = new Date(date);
+  return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
+};
 ---
 
 <div class="post-list">
@@ -12,7 +16,7 @@ const sorted = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate
       <li>
         <a class="post-title" href={`/blog/${post.id}`}>{post.data.title}</a>
         <br />
-        <span class="post-date">{post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+        <span class="post-date">{formatDate(post.data.pubDate)}</span>
         {post.data.description && <p class="post-excerpt">{post.data.description}</p>}
       </li>
     ))}

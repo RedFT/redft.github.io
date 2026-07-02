@@ -32,13 +32,18 @@ const suggestedPosts = [...tagMatch, ...tagMiss]
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 3);
 
+const formatDate = (date) => {
+  const d = new Date(date);
+  return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
+};
+
 ---
 
 <BaseLayout title={post.data.title} description={post.data.description} currentPath={Astro.url.pathname}>
   <a href="/" class="back-link">&larr; Back to all posts</a>
   <h1 class="post-title">{post.data.title}</h1>
   <p class="post-meta">
-    <span class="post-date">{post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+    <span class="post-date">{formatDate(post.data.pubDate)}</span>
     <span class="separator">&middot;</span>
     <span class="reading-time">{readingTime} min read</span>
   </p>
