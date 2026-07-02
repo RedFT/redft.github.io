@@ -3,6 +3,7 @@ title: My Accidental Local AI Setup
 pubDate: 2026-01-15
 description: The accidental path from a desktop chat app to running AI coding agents on self-hosted models.
 tags: [ai, self-hosting, llm, gpu]
+draft: true
 ---
 
 I found Jan by accident. It is a desktop app that downloads models from Hugging Face and runs them on your GPU. I installed it, loaded a 7B model, and watched it generate its first response. No API key. No credit card. No data leaving my machine. It felt like discovering you can brew your own coffee instead of buying it, except the coffee is a language model and the brewing involves gigabytes of weights.

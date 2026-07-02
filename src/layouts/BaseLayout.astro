@@ -8,8 +8,8 @@ export interface Props {
   currentPath?: string;
 }
 
-const { title, description = 'Personal site of RedFT', currentPath = '/' } = Astro.props;
-const pageTitle = title ? `${title} | RedFT` : 'RedFT';
+const { title, description = 'Personal site of Norbu Tsering', currentPath = '/' } = Astro.props;
+const pageTitle = title ? `${title} | Norbu Tsering` : 'Norbu Tsering';
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const navLinks = [
   { href: '/', label: 'Blog' },
@@ -34,7 +34,7 @@ const navLinks = [
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta name="twitter:image" content="https://norbu.link/og-default.svg" />
-    <link rel="alternate" type="application/rss+xml" title="RedFT" href="/rss.xml" />
+    <link rel="alternate" type="application/rss+xml" title="Norbu Tsering" href="/rss.xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Material+Icons&display=swap" rel="stylesheet" />
@@ -43,7 +43,7 @@ const navLinks = [
   <body>
     <header>
       <div class="inner">
-        <a href="/" class="site-name">RedFT</a>
+        <a href="/" class="site-name">Norbu Tsering</a>
         <nav>
           {navLinks.map(link => (
             <a
